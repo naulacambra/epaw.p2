@@ -10,6 +10,15 @@ jQuery(document).ready(function($) {
 			},
 			success : function(response) {
 				console.log(response);
+				if(response.success == "true"){
+					console.log("no existe");
+				}else{
+					$('.error[for="username"]').show();
+				}
+			},
+			error: function(response){
+				console.log("error");
+				console.log(response);
 			}
 		});
 	});

@@ -1,9 +1,7 @@
 package controllers;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 import models.BeanUser;
 import utils.BeanUtilities;
@@ -15,13 +13,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.tomcat.util.http.Parameters;
-
 /**
  * Servlet implementation class formcontroller
  */
 @WebServlet("/formcontroller")
 public class formcontroller extends HttpServlet {
+	static final int KEY = 0;
+	static final int VALUE = 1;
+
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -56,17 +55,36 @@ public class formcontroller extends HttpServlet {
 	}
 
 	/**
+	 * @throws IOException
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) {
+			HttpServletResponse response) throws IOException {
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+
+		ArrayList<String[]> objectToReturn = new ArrayList<String[]>();
 		switch (request.getParameter("action")) {
 		case "checkUsername":
+			String[] data = new String[2];
+			data[KEY] = "'success'";
+			data[VALUE] = "false";
+			objectToReturn.add(data);
 			break;
 		default:
 		}
+		String stringToReturn = arrayToJson( new ArrayList<String[]>() );
+		response.getWriter().write( stringToReturn );
+	}
 
-		System.out.println(request.getParameter("action"));
+	private String arrayToJson(ArrayList<String[]> array) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("{");
+		for(int i=0; i < array.size(); ++i){
+			sb.append(array.get(i)[KEY] + ":" + array.get(i)[VALUE]);
+		}
+		sb.append("}");
+		return sb.toString();
 	}
 }

@@ -41,7 +41,6 @@ public class BeanUser {
 
 		// Consultar si existeix un usuari igual a la BD
 		error[0] = 1;
-
 	}
 
 	public void setMail(String mail) {
@@ -60,5 +59,9 @@ public class BeanUser {
 
 	private boolean hasValue(String val) {
 		return ((val != null) && (!val.equals("")));
+	}
+	
+	static public boolean usernameExists( String username ){
+		return true;
 	}
 }

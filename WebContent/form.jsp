@@ -41,13 +41,7 @@
 				<td><input type="text" name="username"
 					value="<%=user.getUsername()%>" id="username" class="required"
 					minlength="5" /></td>
-				<%
-					if (user.getError()[0] == 1) {
-				%>
-				<td class="error">The username already exists in our DB!</td>
-				<%
-					}
-				%>
+				<td class="error" for="username">The username already exists in our DB!</td>
 			</tr>
 			<tr>
 				<td>Mail</td>
