@@ -5,7 +5,7 @@ public class BeanUser {
 	private String fullName = "";
 	private String username = "";
 	private String mail = "";
-	private String password = "";
+	private String pwd = "";
 	private int[] error = { 0, 0 };
 
 	/* Getters */
@@ -13,7 +13,7 @@ public class BeanUser {
 		return fullName;
 	}
 
-	public String getUser() {
+	public String getUsername() {
 		return username;
 	}
 
@@ -21,8 +21,8 @@ public class BeanUser {
 		return mail;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getPwd() {
+		return pwd;
 	}
 
 	public int[] getError() {
@@ -48,14 +48,14 @@ public class BeanUser {
 		this.mail = mail;
 	}
 	
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
 	}
 
 	/* Logic Functions */
 
 	public boolean isComplete() {
-		return (hasValue(getUser()) && hasValue(getMail()));
+		return (hasValue(getUsername()) && hasValue(getMail()));
 	}
 
 	private boolean hasValue(String val) {
