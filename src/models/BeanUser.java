@@ -1,8 +1,10 @@
 package models;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import utils.DAO;
+import utils.Encryption;
 
 public class BeanUser {
 
@@ -18,7 +20,7 @@ public class BeanUser {
 	public String getName() {
 		return name;
 	}
-	
+
 	public String getSurname() {
 		return surname;
 	}
@@ -40,19 +42,16 @@ public class BeanUser {
 	}
 
 	/* Setters */
-	public void setName(String name) {		
-		// Consultar si existeix un usuari igual a la BD
-		error[0] = 1;
+	public void setName(String name) {
+		this.name = name;
 	}
-	
-	public void setSurname(String surname) {		
-		// Consultar si existeix un usuari igual a la BD
-		error[0] = 1;
+
+	public void setSurname(String surname) {
+		this.surname = surname;
 	}
 
 	public void setUsername(String username) {
-		// Consultar si existeix un usuari igual a la BD
-		error[0] = 1;
+		this.username = username;
 	}
 
 	public void setMail(String mail) {
@@ -60,7 +59,7 @@ public class BeanUser {
 	}
 
 	public void setPwd(String pwd) {
-		this.pwd = pwd;
+		this.pwd = Encryption.MD5(pwd);
 	}
 
 	/* Logic Functions */
@@ -124,6 +123,60 @@ public class BeanUser {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 			return true;
+		}
+	}
+
+	public static BeanUser[] getUsers() {
+		if (database == null)
+			try {
+				database = new DAO();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		try {
+			int total = 0;
+			ResultSet result = database.executeSelectSQL("SELECT * FROM Users");
+			if (result.last()) {
+				total = result.getRow();
+				result.beforeFirst();
+			}
+			BeanUser[] users = new BeanUser[total];
+			int count = 0;
+			while (result.next()) {
+				BeanUser tempUser = new BeanUser();
+				tempUser.setName(result.getString("name"));
+				tempUser.setSurname(result.getString("surname"));
+				tempUser.setUsername(result.getString("username"));
+				tempUser.setMail(result.getString("mail"));
+				tempUser.setPwd(result.getString("pwd"));
+				users[count] = tempUser;
+			}
+			return users;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return new BeanUser[0];
+		}
+	}
+
+	public void saveUser() {
+		if (database == null)
+			try {
+				database = new DAO();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		try {
+			ResultSet result = database
+					.executeSQL("INSERT INTO User (`name`, surname, username, mail, pwd) "
+							+ "VALUES ('"
+							+ name
+							+ "', '"
+							+ surname
+							+ "', '"
+							+ username + "', '" + mail + "', '" + pwd + "');");
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 }
