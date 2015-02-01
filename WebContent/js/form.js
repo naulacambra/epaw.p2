@@ -2,15 +2,16 @@ jQuery(document).ready(function($) {
 	/* Check Username */
 	$('#username').focusout(function() {
 		$.ajax({
-			url : "formcontroller",
+			url : "ajaxcontroller",
 			type : "POST",
+			dataType: "json",
 			data : {
 				action: 'checkUsername',
 				data: $('#username').val()
 			},
 			success : function(response) {
-				console.log(response);
-				if(response.success == "true"){
+				response = response[0];
+				if(response.success){
 					console.log("no existe");
 				}else{
 					$('.error[for="username"]').show();

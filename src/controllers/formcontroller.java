@@ -18,8 +18,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/formcontroller")
 public class formcontroller extends HttpServlet {
-	static final int KEY = 0;
-	static final int VALUE = 1;
 
 	private static final long serialVersionUID = 1L;
 
@@ -61,30 +59,5 @@ public class formcontroller extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
-		response.setContentType("application/json");
-		response.setCharacterEncoding("UTF-8");
-
-		ArrayList<String[]> objectToReturn = new ArrayList<String[]>();
-		switch (request.getParameter("action")) {
-		case "checkUsername":
-			String[] data = new String[2];
-			data[KEY] = "'success'";
-			data[VALUE] = "false";
-			objectToReturn.add(data);
-			break;
-		default:
-		}
-		String stringToReturn = arrayToJson( new ArrayList<String[]>() );
-		response.getWriter().write( stringToReturn );
-	}
-
-	private String arrayToJson(ArrayList<String[]> array) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("{");
-		for(int i=0; i < array.size(); ++i){
-			sb.append(array.get(i)[KEY] + ":" + array.get(i)[VALUE]);
-		}
-		sb.append("}");
-		return sb.toString();
 	}
 }
