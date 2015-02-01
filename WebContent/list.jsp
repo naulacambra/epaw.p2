@@ -1,6 +1,8 @@
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="models.BeanUser"%>
+<%@ page import="java.util.ArrayList"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -12,7 +14,10 @@
 </head>
 <body>
 	<%
-		BeanUser[] users = BeanUser.getUsers();
+		ArrayList<BeanUser> users = new ArrayList<BeanUser>();
+		if (request.getAttribute("users") != null) {
+			users = (ArrayList<BeanUser>) request.getAttribute("users");
+		}
 	%>
 	<table>
 		<thead>
@@ -26,13 +31,13 @@
 		</thead>
 		<tbody>
 			<%
-				for (int i = 0; i < users.length; ++i) {
+				for (BeanUser user : users) {
 					out.println("<tr>");
-					out.println("<td>" + users[i].getName() + "</td>");
-					out.println("<td>" + users[i].getSurname() + "</td>");
-					out.println("<td>" + users[i].getUsername() + "</td>");
-					out.println("<td>" + users[i].getMail() + "</td>");
-					out.println("<td>" + users[i].getPwd() + "</td>");
+					out.println("<td>" + user.getName() + "</td>");
+					out.println("<td>" + user.getSurname() + "</td>");
+					out.println("<td>" + user.getUsername() + "</td>");
+					out.println("<td>" + user.getMail() + "</td>");
+					out.println("<td>" + user.getPwd() + "</td>");
 					out.println("</tr>");
 				}
 			%>

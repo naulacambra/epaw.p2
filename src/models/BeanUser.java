@@ -2,6 +2,7 @@ package models;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import utils.DAO;
 import utils.Encryption;
@@ -71,9 +72,10 @@ public class BeanUser {
 	private boolean hasValue(String val) {
 		return ((val != null) && (!val.equals("")));
 	}
-	
-	public String toString(){
-		return this.name + " " + this.surname + " " + this.username + " " + this.mail + " " + this.pwd;
+
+	public String toString() {
+		return this.name + " " + this.surname + " " + this.username + " "
+				+ this.mail + " " + this.pwd;
 	}
 
 	static public boolean usernameExists(String username) {
@@ -130,7 +132,8 @@ public class BeanUser {
 		}
 	}
 
-	public static BeanUser[] getUsers() {
+	public static ArrayList<BeanUser> getUsers() {
+		ArrayList<BeanUser> users = new ArrayList<BeanUser>();
 		if (database == null)
 			try {
 				database = new DAO();
@@ -138,14 +141,8 @@ public class BeanUser {
 				e.printStackTrace();
 			}
 		try {
-			int total = 0;
 			ResultSet result = database.executeSelectSQL("SELECT * FROM Users");
-			if (result.last()) {
-				total = result.getRow();
-				result.beforeFirst();
-			}
-			BeanUser[] users = new BeanUser[total];
-			int count = 0;
+
 			while (result.next()) {
 				BeanUser tempUser = new BeanUser();
 				tempUser.setName(result.getString("name"));
@@ -153,16 +150,12 @@ public class BeanUser {
 				tempUser.setUsername(result.getString("username"));
 				tempUser.setMail(result.getString("mail"));
 				tempUser.setPwd(result.getString("pwd"));
-				users[count] = tempUser;
-				++count;
-			}
-			for (int i = 0; i < users.length; i++) {
-				System.out.println(users[i]);
+				users.add(tempUser);
 			}
 			return users;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return new BeanUser[0];
+			return users;
 		}
 	}
 

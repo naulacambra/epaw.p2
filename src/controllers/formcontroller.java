@@ -1,6 +1,7 @@
 package controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import models.BeanUser;
 import utils.BeanUtilities;
@@ -51,6 +52,8 @@ public class formcontroller extends HttpServlet {
 		BeanUtilities.populateBean(user, request);
 		if (user.isComplete()) {
 			user.saveUser();
+			ArrayList<BeanUser> users = BeanUser.getUsers();
+			request.setAttribute("users", users);
 			RequestDispatcher dispatcher = request
 					.getRequestDispatcher("/list.jsp");
 			if (dispatcher != null)
