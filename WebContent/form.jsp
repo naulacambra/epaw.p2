@@ -47,7 +47,7 @@
 				<td>Mail</td>
 				<td><input type="text" name="mail" value="<%=user.getMail()%>"
 					id="mail" class="required email" /></td>
-				<td class="error">This mail is already used by other user</td>
+				<td class="error" for="mail">This mail is already used by other user</td>
 			</tr>
 			<tr>
 				<td>Password</td>

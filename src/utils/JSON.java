@@ -24,6 +24,10 @@ public class JSON {
 		obj.addProperty(property, value);
 		array.add(obj);
 	}
+	
+	public int getArraySize(){
+		return array.size();
+	}
 
 	public String toString() {
 		return gson.toJson(array);

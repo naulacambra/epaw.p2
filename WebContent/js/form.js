@@ -4,7 +4,17 @@ jQuery(document).ready(function($) {
 		ajaxCall({
 			action : 'checkUsername',
 			data : $('#username').val()
-		}, $('.error[for="username"]'));
+		}, $('.error[for="username"]'), function(response) {
+			response = parseResponse(response);
+			if (response.success) {
+				if (response.exists)
+					$('.error[for="username"]').show();
+				else
+					console.log("no existe");
+			} else {
+				console.warn("Something went wrong");
+			}
+		});
 	});
 	/* !Check Username */
 	/* Check Mail */
@@ -17,20 +27,13 @@ jQuery(document).ready(function($) {
 	/* !Check Username */
 });
 
-function ajaxCall(data, errorElement) {
+function ajaxCall(data, errorElement, successFunction) {
 	$.ajax({
 		url : "ajaxcontroller",
 		type : "POST",
 		dataType : "json",
 		data : data,
-		success : function(response) {
-			response = response[0];
-			if (response.success) {
-				console.log("no existe");
-			} else {
-				errorElement.show();
-			}
-		},
+		success : successFunction,
 		error : function(response) {
 			response = response[0];
 			console.log("error");
@@ -39,13 +42,14 @@ function ajaxCall(data, errorElement) {
 	});
 }
 
-/**
- * Ajax Example
- * 
- * $.ajax({ url: "index.php?option=com_inatal&task=checkGiftCode&format=raw",
- * type: "POST", data: $('#form-codigo-regal').serialize(), success:
- * function(response) { if (response.success) {
- * $("#dialog-form").dialog("close"); alert(response.message); } else {
- * alert(response.error_message); } } });
- * 
- */
+function parseResponse(response) {
+	count = 0;
+	new_response = {};
+	response.forEach(function(element) {
+		for (key in element) {
+			new_response[key] = response[count][key];
+			++count;
+		}
+	});
+	return new_response;
+}
