@@ -50,6 +50,7 @@ public class formcontroller extends HttpServlet {
 		BeanUser user = new BeanUser();
 		BeanUtilities.populateBean(user, request);
 		if (user.isComplete()) {
+			user.saveUser();
 			RequestDispatcher dispatcher = request
 					.getRequestDispatcher("/list.jsp");
 			if (dispatcher != null)
