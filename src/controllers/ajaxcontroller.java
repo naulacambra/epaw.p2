@@ -50,7 +50,7 @@ public class ajaxcontroller extends HttpServlet {
 		switch (request.getParameter("action")) {
 		case "checkUsername":
 			result.addPair("success", true);
-			result.addPair("exists", BeanUser.usernameExists("naulacambra"));
+			result.addPair("exists", BeanUser.usernameExists(request.getParameter("data")));
 			break;
 		case "checkMail":
 			result.addPair("success", false);

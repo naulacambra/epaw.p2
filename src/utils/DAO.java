@@ -9,9 +9,10 @@ public class DAO {
 	public DAO() throws Exception {
 		String user = "mysql";
 		String password = "prac";
+		String database = "twittsire";
 		Class.forName("com.mysql.jdbc.Driver").newInstance();
 		connection = DriverManager
-				.getConnection("jdbc:mysql://localhost/ts1?user=" + user
+				.getConnection("jdbc:mysql://localhost/" + database + "?user=" + user
 						+ "&password=" + password);
 		statement = connection.createStatement();
 	}
