@@ -12,12 +12,7 @@
 </head>
 <body>
 	<%
-		BeanUser[] users = null;
-		if (request.getAttribute("users") != null) {
-			users = (BeanUser[]) request.getAttribute("users");
-		} else {
-			users = new BeanUser[0];
-		}
+		BeanUser[] users = BeanUser.getUsers();
 	%>
 	<table>
 		<thead>
@@ -30,14 +25,17 @@
 			</tr>
 		</thead>
 		<tbody>
-			<% for (int i = 0; i < users.length; ++i) { %>
-				<tr>
-					<td><% users[i].getName(); %></td>
-					<td><% users[i].getSurname(); %></td>
-					<td><% users[i].getMail(); %></td>
-					<td><% users[i].getPwd(); %></td>
-				</tr>
-			<% } %>
+			<%
+				for (int i = 0; i < users.length; ++i) {
+					out.println("<tr>");
+					out.println("<td>" + users[i].getName() + "</td>");
+					out.println("<td>" + users[i].getSurname() + "</td>");
+					out.println("<td>" + users[i].getUsername() + "</td>");
+					out.println("<td>" + users[i].getMail() + "</td>");
+					out.println("<td>" + users[i].getPwd() + "</td>");
+					out.println("</tr>");
+				}
+			%>
 		</tbody>
 	</table>
 </body>

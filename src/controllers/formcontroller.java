@@ -1,7 +1,6 @@
 package controllers;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import models.BeanUser;
 import utils.BeanUtilities;
@@ -51,19 +50,11 @@ public class formcontroller extends HttpServlet {
 		BeanUser user = new BeanUser();
 		BeanUtilities.populateBean(user, request);
 		if (user.isComplete()) {
-			user.saveUser();
-			BeanUser[] users = BeanUser.getUsers();
-			request.setAttribute("users", users);
 			RequestDispatcher dispatcher = request
 					.getRequestDispatcher("/list.jsp");
 			if (dispatcher != null)
 				dispatcher.forward(request, response);
-		}else{
-			System.out.println(user.getName());
-			System.out.println(user.getSurname());
-			System.out.println(user.getUsername());
-			System.out.println(user.getMail());
-			System.out.println(user.getPwd());
+		} else {
 			System.out.println("L'usuari no està complet");
 		}
 	}

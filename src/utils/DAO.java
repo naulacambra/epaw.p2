@@ -27,6 +27,10 @@ public class DAO {
 		statement = connection.createStatement();
 		return result;
 	}
+	
+	public void executeInsertSQL(String query) throws SQLException {
+		statement.execute(query);
+	}
 
 	// TODO: code for updates for Assignments 2, 3 and 4.
 	public void disconnectBD() throws SQLException {

@@ -71,6 +71,10 @@ public class BeanUser {
 	private boolean hasValue(String val) {
 		return ((val != null) && (!val.equals("")));
 	}
+	
+	public String toString(){
+		return this.name + " " + this.surname + " " + this.username + " " + this.mail + " " + this.pwd;
+	}
 
 	static public boolean usernameExists(String username) {
 		if (database == null)
@@ -150,6 +154,10 @@ public class BeanUser {
 				tempUser.setMail(result.getString("mail"));
 				tempUser.setPwd(result.getString("pwd"));
 				users[count] = tempUser;
+				++count;
+			}
+			for (int i = 0; i < users.length; i++) {
+				System.out.println(users[i]);
 			}
 			return users;
 		} catch (SQLException e) {
@@ -167,14 +175,14 @@ public class BeanUser {
 			}
 
 		try {
-			ResultSet result = database
-					.executeSQL("INSERT INTO User (`name`, surname, username, mail, pwd) "
-							+ "VALUES ('"
-							+ name
-							+ "', '"
-							+ surname
-							+ "', '"
-							+ username + "', '" + mail + "', '" + pwd + "');");
+			database.executeInsertSQL("INSERT INTO Users (`name`, surname, username, mail, pwd) "
+					+ "VALUES ('"
+					+ name
+					+ "', '"
+					+ surname
+					+ "', '"
+					+ username
+					+ "', '" + mail + "', '" + pwd + "');");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
