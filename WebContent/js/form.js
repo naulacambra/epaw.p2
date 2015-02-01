@@ -1,30 +1,43 @@
 jQuery(document).ready(function($) {
 	/* Check Username */
 	$('#username').focusout(function() {
-		$.ajax({
-			url : "ajaxcontroller",
-			type : "POST",
-			dataType: "json",
-			data : {
-				action: 'checkUsername',
-				data: $('#username').val()
-			},
-			success : function(response) {
-				response = response[0];
-				if(response.success){
-					console.log("no existe");
-				}else{
-					$('.error[for="username"]').show();
-				}
-			},
-			error: function(response){
-				console.log("error");
-				console.log(response);
-			}
-		});
+		ajaxCall({
+			action : 'checkUsername',
+			data : $('#username').val()
+		}, $('.error[for="username"]'));
+	});
+	/* !Check Username */
+	/* Check Mail */
+	$('#mail').focusout(function() {
+		ajaxCall({
+			action : 'checkMail',
+			data : $('#mail').val()
+		}, $('.error[for="mail"]'));
 	});
 	/* !Check Username */
 });
+
+function ajaxCall(data, errorElement) {
+	$.ajax({
+		url : "ajaxcontroller",
+		type : "POST",
+		dataType : "json",
+		data : data,
+		success : function(response) {
+			response = response[0];
+			if (response.success) {
+				console.log("no existe");
+			} else {
+				errorElement.show();
+			}
+		},
+		error : function(response) {
+			response = response[0];
+			console.log("error");
+			console.log(response);
+		}
+	});
+}
 
 /**
  * Ajax Example

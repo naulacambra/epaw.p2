@@ -50,23 +50,20 @@ public class ajaxcontroller extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-//		response.setContentType("application/json");
-//		response.setCharacterEncoding("UTF-8");
-
-//		ArrayList<String[]> objectToReturn = new ArrayList<String[]>();
-//		switch (request.getParameter("action")) {
-//		case "checkUsername":
-//			String[] data = new String[2];
-//			data[KEY] = "'success'";
-//			data[VALUE] = "false";
-//			objectToReturn.add(data);
-//			break;
-//		default:
-//		}
-//		String stringToReturn = arrayToJson(objectToReturn);
 		JSON result = new JSON();
-		result.addPair("success", true);
-		
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+
+		switch (request.getParameter("action")) {
+		case "checkUsername":
+			result.addPair("success", true);
+			break;
+		case "checkMail":
+			result.addPair("success", true);
+			break;
+		default:
+		}
+
 		response.getWriter().write(result.toString());
 	}
 }
