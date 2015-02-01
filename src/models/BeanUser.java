@@ -92,4 +92,31 @@ public class BeanUser {
 			return true;
 		}
 	}
+
+	static public boolean mailExists(String mail) {
+		if (database == null)
+			try {
+				database = new DAO();
+			} catch (Exception e) {
+				e.printStackTrace();
+				return true;
+			}
+
+		try {
+			ResultSet result = database
+					.executeSQL("SELECT count(*) as count FROM Users WHERE mail = '"
+							+ mail + "'");
+			if (result.first())
+				if (result.getInt("count") > 0)
+					return true;
+				else
+					return false;
+			else
+				return true;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+			return true;
+		}
+	}
 }

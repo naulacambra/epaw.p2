@@ -53,7 +53,8 @@ public class ajaxcontroller extends HttpServlet {
 			result.addPair("exists", BeanUser.usernameExists(request.getParameter("data")));
 			break;
 		case "checkMail":
-			result.addPair("success", false);
+			result.addPair("success", true);
+			result.addPair("exists", BeanUser.mailExists(request.getParameter("data")));
 			break;
 		default:
 		}
