@@ -1,6 +1,7 @@
 @CHARSET "UTF-8";
 
-.error {
+label.error,
+label.error_label {
 	display: none;
     font: normal 10px arial;
     padding: 3px;

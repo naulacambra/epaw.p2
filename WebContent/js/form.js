@@ -8,7 +8,7 @@ jQuery(document).ready(function($) {
 			response = parseResponse(response);
 			if (response.success) {
 				if (response.exists)
-					$('.error[for="username"]').show();
+					$('.error_label[for="username"]').show();
 				else
 					console.log("no existe");
 			} else {
@@ -22,9 +22,14 @@ jQuery(document).ready(function($) {
 		ajaxCall({
 			action : 'checkMail',
 			data : $('#mail').val()
-		}, $('.error[for="mail"]'));
+		}, $('.error_label[for="mail"]'));
 	});
 	/* !Check Username */
+	/*Reset error labels*/
+	$('input').focus(function(){
+		$('label.error_label[for="' + $(this).attr('name')+ '"]').hide();
+	});
+	/*!Reset error labels*/
 });
 
 function ajaxCall(data, errorElement, successFunction) {

@@ -34,20 +34,19 @@
 				<td>Name and surname</td>
 				<td><input type="text" name="fullName"
 					value="<%=user.getFullName()%>" id="fullName" class="required" /></td>
-				<td class="error">The username already exists in our DB!</td>
 			</tr>
 			<tr>
 				<td>Username</td>
 				<td><input type="text" name="username"
 					value="<%=user.getUsername()%>" id="username" class="required"
 					minlength="5" /></td>
-				<td class="error" for="username">The username already exists in our DB!</td>
+				<td><label class="error_label" for="username">The username already exists in our DB!</label></td>
 			</tr>
 			<tr>
 				<td>Mail</td>
 				<td><input type="text" name="mail" value="<%=user.getMail()%>"
 					id="mail" class="required email" /></td>
-				<td class="error" for="mail">This mail is already used by other user</td>
+				<td><label class="error_label" for="mail">This mail is already used by other user</label></td>
 			</tr>
 			<tr>
 				<td>Password</td>
@@ -58,7 +57,7 @@
 				<td>Repeat password</td>
 				<td><input type="password" name="pwd_check"
 					id="pwd_check" class="required" /></td>
-				<td class="error">The passwords fields doesn't match</td>
+				<td><label class="error_label">The passwords fields doesn't match</label></td>
 			</tr>
 			<tr>
 				<td><input type="submit" value="Enviar"></td>
