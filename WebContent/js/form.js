@@ -25,6 +25,14 @@ jQuery(document).ready(function($) {
 		}, $('.error_label[for="mail"]'));
 	});
 	/* !Check Username */
+	/*Check repeat password*/
+	$('#pwd_check').keyup(function() {
+		if($(this).val() != $('#pwd').val())
+			$('.error_label[for="pwd_check"]').show();
+		else
+			$('.error_label[for="pwd_check"]').hide();
+	});
+	/*!Check repeat password*/
 	/*Reset error labels*/
 	$('input').focus(function(){
 		$('label.error_label[for="' + $(this).attr('name')+ '"]').hide();

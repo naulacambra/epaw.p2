@@ -57,7 +57,7 @@
 				<td>Repeat password</td>
 				<td><input type="password" name="pwd_check"
 					id="pwd_check" class="required" /></td>
-				<td><label class="error_label">The passwords fields doesn't match</label></td>
+				<td><label class="error_label" for="pwd_check">The passwords fields doesn't match</label></td>
 			</tr>
 			<tr>
 				<td><input type="submit" value="Enviar"></td>
