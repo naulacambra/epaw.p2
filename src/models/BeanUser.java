@@ -6,7 +6,8 @@ import utils.DAO;
 
 public class BeanUser {
 
-	private String fullName = "";
+	private String name = "";
+	private String surname = "";
 	private String username = "";
 	private String mail = "";
 	private String pwd = "";
@@ -14,8 +15,12 @@ public class BeanUser {
 	private static DAO database = null;
 
 	/* Getters */
-	public String getFullName() {
-		return fullName;
+	public String getName() {
+		return name;
+	}
+	
+	public String getSurname() {
+		return surname;
 	}
 
 	public String getUsername() {
@@ -35,15 +40,17 @@ public class BeanUser {
 	}
 
 	/* Setters */
-	public void setFullName(String fullName) {
-
+	public void setName(String name) {		
 		// Consultar si existeix un usuari igual a la BD
 		error[0] = 1;
-
+	}
+	
+	public void setSurname(String surname) {		
+		// Consultar si existeix un usuari igual a la BD
+		error[0] = 1;
 	}
 
 	public void setUsername(String username) {
-
 		// Consultar si existeix un usuari igual a la BD
 		error[0] = 1;
 	}

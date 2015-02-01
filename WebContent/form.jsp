@@ -31,9 +31,14 @@
 	<form action="/epaw_p2/formcontroller" method="post" id=registerForm>
 		<table>
 			<tr>
-				<td>Name and surname</td>
-				<td><input type="text" name="fullName"
-					value="<%=user.getFullName()%>" id="fullName" class="required" /></td>
+				<td>Name</td>
+				<td><input type="text" name="name"
+					value="<%=user.getName()%>" id="name" class="required" /></td>
+			</tr>
+			<tr>
+				<td>Surname</td>
+				<td><input type="text" name="surname"
+					value="<%=user.getSurname()%>" id="surname" class="required" /></td>
 			</tr>
 			<tr>
 				<td>Username</td>

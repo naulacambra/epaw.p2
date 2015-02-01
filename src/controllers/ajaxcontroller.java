@@ -17,8 +17,6 @@ import utils.JSON;
 @WebServlet("/ajaxcontroller")
 public class ajaxcontroller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	static final int KEY = 0;
-	static final int VALUE = 1;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
