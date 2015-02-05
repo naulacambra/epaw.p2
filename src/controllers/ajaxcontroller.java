@@ -12,7 +12,7 @@ import models.BeanUser;
 import utils.JSON;
 
 /**
- * Servlet implementation class ajaxcontroller
+ * Aquest servlet s'encarrega de gestionar les peticions AJAX que es facin
  */
 @WebServlet("/ajaxcontroller")
 public class ajaxcontroller extends HttpServlet {
@@ -23,7 +23,6 @@ public class ajaxcontroller extends HttpServlet {
 	 */
 	public ajaxcontroller() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -32,7 +31,7 @@ public class ajaxcontroller extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// No tractem les peticions GET
 	}
 
 	/**
@@ -41,22 +40,32 @@ public class ajaxcontroller extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		// Per tornar la resposta, creem una instancia de la classe JSON
 		JSON result = new JSON();
+		// Definim les capceleres per definir el format de resposta
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
-
+		// Comprovem quina accio s'ens ha demanat amb la variable "action"
 		switch (request.getParameter("action")) {
+		// Comprovar si ja existeix un nom d'usuari
 		case "checkUsername":
+			// Si hem arribat fins aqui, donem per bona la petició AJAX
 			result.addPair("success", true);
-			result.addPair("exists", BeanUser.usernameExists(request.getParameter("data")));
+			// Comprovem si el nom d'usuari donat existeix
+			result.addPair("exists",
+					BeanUser.usernameExists(request.getParameter("data")));
 			break;
+		// Comprovar si ja existeix un mail
 		case "checkMail":
+			// Si hem arribat fins aqui, donem per bona la petició AJAX
 			result.addPair("success", true);
-			result.addPair("exists", BeanUser.mailExists(request.getParameter("data")));
+			// Comprovem si el mail donat ja està registrat
+			result.addPair("exists",
+					BeanUser.mailExists(request.getParameter("data")));
 			break;
 		default:
 		}
-
+		// Escrivim en la resposta les dades en format JSON
 		response.getWriter().write(result.toString());
 	}
 }

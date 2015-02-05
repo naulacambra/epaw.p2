@@ -18,7 +18,6 @@
 </script>
 </head>
 <body>
-
 	<%
 		BeanUser user = null;
 		if (request.getAttribute("username") != null) {
@@ -27,7 +26,6 @@
 			user = new BeanUser();
 		}
 	%>
-
 	<form action="/epaw_p2/formcontroller" method="post" id=registerForm>
 		<table>
 			<tr>

@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+//Classe per poder generar respostes en format JSON
 public class JSON {
 	private Gson gson;
 	private JsonArray array;
@@ -24,8 +25,8 @@ public class JSON {
 		obj.addProperty(property, value);
 		array.add(obj);
 	}
-	
-	public int getArraySize(){
+
+	public int getArraySize() {
 		return array.size();
 	}
 

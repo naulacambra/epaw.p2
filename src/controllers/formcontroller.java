@@ -37,6 +37,7 @@ public class formcontroller extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
+		//Si rebem una petició GET la processem com si fos POST
 		doPost(request, response);
 	}
 
@@ -48,18 +49,31 @@ public class formcontroller extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
+		//Creem un usuari per poder gestionar la petició
 		BeanUser user = new BeanUser();
+		//Intentem omplir-lo amb les dades que ens arriben en la petició
 		BeanUtilities.populateBean(user, request);
 		if (user.isComplete()) {
+			//Si l'usuari té totes les dades el guardem
 			user.saveUser();
+			//Generem un ArrayList amb els usuaris guardats
 			ArrayList<BeanUser> users = BeanUser.getUsers();
+			//Enviem aquest ArrayList amb la resposta al JSP
 			request.setAttribute("users", users);
+			//Cridem al JSP list.jsp per mostrar la llista d'usuaris
 			RequestDispatcher dispatcher = request
 					.getRequestDispatcher("/list.jsp");
 			if (dispatcher != null)
 				dispatcher.forward(request, response);
 		} else {
-			System.out.println("L'usuari no està complet");
+			//Si l'usuari no està complet, el retornem al formulari inicial
+			request.setAttribute("user", user);
+			//Cridem al JSP form.jsp per tornar a mostrar el formulari
+			//o mostrar-lo per primera vegada
+			RequestDispatcher dispatcher = request
+					.getRequestDispatcher("/form.jsp");
+			if (dispatcher != null)
+				dispatcher.forward(request, response);
 		}
 	}
 }
